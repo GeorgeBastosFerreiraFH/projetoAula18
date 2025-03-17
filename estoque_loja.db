@@ -1,0 +1,28 @@
+CREATE DATABASE IF NOT EXISTS estoque_loja;
+
+USE estoque_loja;
+
+CREATE TABLE clientes(
+	id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+	nome VARCHAR(255),
+    email VARCHAR(255),
+    endereco TEXT
+);
+
+CREATE TABLE produtos(
+	id_produto INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    qntd_estoque INT DEFAULT 0,
+    preco DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE vendas(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente INT,
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+    id_produto INT,
+    FOREIGN KEY (id_produto) REFERENCES produtos(id_produto),
+    qntd_vendida INT,
+    data_venda DATE
+);
